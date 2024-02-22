@@ -3,10 +3,8 @@ on:
   schedule:
       - cron:  '*/7 * * * *'
 jobs:
-  packages:
-    runs-on: 'ubuntu-latest'
   build:
     runs-on: 'ubuntu-latest'
     steps:
      - name: 'Refetch'
-     - run: curl -X GET https://rns-snowy.vercel.app/api/cron
+       run: curl -X GET https://rns-snowy.vercel.app/api/cron
