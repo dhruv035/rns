@@ -1,4 +1,4 @@
-
+name: 'RNS'
 on:
   schedule:
       - cron:  '*/5 * * * *'
