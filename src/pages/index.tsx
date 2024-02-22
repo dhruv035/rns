@@ -5,6 +5,7 @@ import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import clientPromise from "@/backend-services/db";
 import { ObjectId, WithId, Document } from "mongodb";
 import { Chart } from "react-google-charts";
+import { formatGwei } from "viem";
 
 type gasData = {
   timestamp: number;
@@ -24,7 +25,7 @@ export const getServerSideProps = (async () => {
       const data = res.map((object: any) => {
         return {
           timestamp: object.timestamp,
-          gasPrice: object.medGas,
+          gasPrice: Number(formatGwei(BigInt(object.medGas))),
         };
       });
       return data;
@@ -37,25 +38,46 @@ export const getServerSideProps = (async () => {
 export default function Home({
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const chartData:any = [["Timestamp", "GasPrice"]];
-  data.map((object:gasData)=>{
-    chartData.push([object.timestamp,object.gasPrice])
-  })
-  
+  const chartData: any = [["Timestamp", "GasPrice"]];
+  data.map((object: gasData) => {
+    chartData.push([object.timestamp, object.gasPrice]);
+  });
+
   const options = {
     title: "Company Performance",
     curveType: "function",
     legend: { position: "bottom" },
   };
 
-  
-  return <div>
-     <Chart
-      chartType="LineChart"
-      width="100%"
-      height="400px"
-      data={chartData}
-      options={options}
-    />
-  </div>;
+  return (
+    <main>
+      <div>
+        <Chart
+          chartType="LineChart"
+          width="100%"
+          height="400px"
+          data={chartData}
+          options={options}
+        />
+        <table>
+          <tbody>
+            <tr>
+              <th>No.</th>
+              <th>Timestamp</th>
+              <th>Gas</th>
+            </tr>
+            {data.map((object: gasData, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index}</td>
+                  <td>{object.timestamp}</td>
+                  <td>{object.gasPrice}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </main>
+  );
 }
