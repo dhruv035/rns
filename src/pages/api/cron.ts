@@ -13,10 +13,8 @@ export default async function handler(
   res: NextApiResponse<Data>,
 ) {
 
-    console.log("asd",process.env.INFURA_KEY)
     
     const body = req.query;
-    console.log("BODY",body)
     const publicClient=createPublicClient({
         chain: avalanche,
         transport: http('https://api.avax.network/ext/bc/C/rpc')
@@ -27,8 +25,5 @@ export default async function handler(
     const client = await clientPromise;
     const db = client.db('RNS')
     const data = await db.collection('Gas Tracker').insertOne({timestamp:Date.now(),medGas:gas})
-    console.log("DATA",data,data.insertedId)
-    console.log("GAS",gas,gas2)
-    console.log("HELLOW")
   res.status(200).json({ gas:Number(gas) });
 }
