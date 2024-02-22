@@ -1,10 +1,10 @@
-name:Github Cron
+
 on:
   schedule:
-     -cron: "*/1 * * * *"
+      - cron:  '*/5 * * * *'
 jobs:
   report:
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-latest'
     steps:
-      -name: Refetch
-      -run: curl -X GET https://rns-snowy.vercel.app/api/cron
+     - name: 'Refetch'
+     - run: curl -X GET https://rns-snowy.vercel.app/api/cron
