@@ -16,7 +16,7 @@ export default async function handler(
     console.log("asd",process.env.INFURA_KEY)
     
     const body = req.query;
-
+    console.log("BODY",body)
     const publicClient=createPublicClient({
         chain: avalanche,
         transport: http('https://api.avax.network/ext/bc/C/rpc')
