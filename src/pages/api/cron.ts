@@ -14,10 +14,8 @@ export default async function handler(
 ) {
 
     console.log("asd",process.env.INFURA_KEY)
-    const chainId = "1";
     
-    const body = req.body;
-    console.log("Body",body)
+    const body = req.query;
 
     const publicClient=createPublicClient({
         chain: avalanche,
