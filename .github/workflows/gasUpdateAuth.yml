@@ -18,9 +18,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-       env:
-         SECRET:${{secrets.backend_rns}}
-    # Runs a single command using the runners shell
-    - name: Send greeting
-    
-      run: curl -d '{"key":"$SECRET"}' -X GET https://rns-snowy.vercel.app/api/cron
+      - name: Send greeting
+        env:
+          super: ${{secrets.backend_rns}}
+        run: curl -d '{"key":"$SECRET"}' -X GET https://rns-snowy.vercel.app/api/cron
