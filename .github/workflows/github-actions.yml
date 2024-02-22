@@ -1,7 +1,7 @@
 name: 'RNS'
 on:
   schedule:
-      - cron:  '*/5 * * * *'
+      - cron:  '*/7 * * * *'
 jobs:
   packages:
     runs-on: 'ubuntu-latest'
