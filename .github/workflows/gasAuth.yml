@@ -22,4 +22,4 @@ jobs:
     - name: Send greeting
       env:
         SECRET : ${{secrets.backend_rns}}
-      run: curl -d '{'key':'$SECRET'}' -X GET https://rns-snowy.vercel.app/api/cron
+      run: curl -X GET https://rns-snowy.vercel.app/api/cron?key="$SECRET"
